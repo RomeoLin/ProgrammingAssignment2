@@ -1,4 +1,4 @@
-## Program assignment 2
+## Program assignment 2 for R Programming Course
 ##
 ## makeCacheMatrix and cacheSolve functions 
 ## are used to cache time-consuming matrix inversion computations
@@ -15,24 +15,25 @@
 ## getSolve: get the value of the inverse matrix
 ##
 makeCacheMatrix <- function(x = matrix()) {
+  ## cache solved inserve matrix in variable 'solved'
   solved <- NULL
   
-  # function to reset matrix content
+  ## function to reset matrix content
   set <- function(y) {
     x <<- y
     solved <<- NULL
   }
   
-  # function to get matrix
+  ## function to get matrix
   get <- function() x
   
-  # function to set solved inverse matrix
+  ## function to set solved inverse matrix
   setSolve <- function(invMatrix) solved <<- invMatrix
   
-  # function to get cache inverse matrix
+  ## function to get cache inverse matrix
   getSolve <- function() solved
   
-  # 
+  ## return list of functions
   list(set = set, get = get,
        setSolve = setSolve,
        getSolve = getSolve)
@@ -46,14 +47,14 @@ makeCacheMatrix <- function(x = matrix()) {
 ## should retrieve the inverse from the cache.
 ##
 cacheSolve <- function(x, ...) {
-  # if already solved, return from cache
+  ## if already solved, return from cache
   m <- x$getSolve()
   if(!is.null(m)) {
     message("getting cached data")
     return(m)
   }
   
-  # solve inverse matrix
+  ## solve inverse matrix
   matrix <- x$get()
   invMatrix <- solve(matrix, ...)
   x$setSolve(invMatrix)
